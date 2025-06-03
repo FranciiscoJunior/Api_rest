@@ -1,0 +1,27 @@
+{
+  "name": "api_rest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./index.js localhost 3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FranciiscoJunior/Api_rest.git"
+  },
+  "keywords": [],
+  "author": "Francisco Júnior",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FranciiscoJunior/Api_rest/issues"
+  },
+  "homepage": "https://github.com/FranciiscoJunior/Api_rest#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mongodb": "^6.16.0",
+    "mongoose": "^7.0.0",
+    "nodemon": "^3.1.10"
+  }
+}
