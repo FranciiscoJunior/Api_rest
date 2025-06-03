@@ -1,4 +1,5 @@
 // Configurando inicialmente
+require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
@@ -15,34 +16,7 @@ app.use (
 app.use (express.json())
 
 //Rotas da API
-app.post('/person', async (req, res) => {
-    //req.body
-
-    //{name: "Francisco Júnior", salary: 5000, approved: false}
-    const { name, salary, approved } = req.body
-
-    if (!name) {
-        res.status(422).json({ error: 'O nome é obrigatório!' })
-    }
-
-    const person = {
-        name,
-        salary,
-        approved,
-    }
-
-    try {
-
-        //Criar dados na coleção
-        await Person.create(person)
-
-        res.status(201).json({ message: 'Pessoa inserida com sucesso!' })
-
-    } catch (err) {
-        res.status(500).json({ error: error })
-    }
-
-})
+const personRouter = require('./routes/personRouter')
 
 //Rota inicial / endpoint
 app.get('/', (req, res) => {
@@ -52,8 +26,8 @@ app.get('/', (req, res) => {
     res.json({ message: 'Oi, Express!' })
 })
 
-const DB_USER = 'contatojuniiordev'
-const DB_PASSWORD = encodeURIComponent('q4weSw2BD9MC3uTD')
+const DB_USER = process.env.DB_USER
+const DB_PASSWORD = encodeURIComponent(process.env.DB_PASSWORD)
 
 //Entregar uma porta
 mongoose
