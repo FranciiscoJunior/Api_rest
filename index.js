@@ -3,6 +3,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
 
+const Person = require('./models/Person')
+
 //Formando uma rota para ler o JSON // Middleware
 app.use (
     express.urlencoded({
@@ -11,6 +13,36 @@ app.use (
 )
 
 app.use (express.json())
+
+//Rotas da API
+app.post('/person', async (req, res) => {
+    //req.body
+
+    //{name: "Francisco Júnior", salary: 5000, approved: false}
+    const { name, salary, approved } = req.body
+
+    if (!name) {
+        res.status(422).json({ error: 'O nome é obrigatório!' })
+    }
+
+    const person = {
+        name,
+        salary,
+        approved,
+    }
+
+    try {
+
+        //Criar dados na coleção
+        await Person.create(person)
+
+        res.status(201).json({ message: 'Pessoa inserida com sucesso!' })
+
+    } catch (err) {
+        res.status(500).json({ error: error })
+    }
+
+})
 
 //Rota inicial / endpoint
 app.get('/', (req, res) => {
